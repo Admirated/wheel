@@ -840,7 +840,6 @@
                 <a href="{{Route('chooseBig', ['page' => 'MakeNewQuest', 'id' => $PageInfo['id']])}}" style="color: black;"><div><i class="fa fa-plus" aria-hidden="true"></i></div></a>
             </div>
         @foreach($PageInfo['task'] as $result)
-            @if($result->dedline)
                 <div class="question_content_block" style="border-bottom-color: {{$result->color}};">
                     
                     <div class="container row justify-content-between pe-0" style="flex-wrap: nowrap; width: 100%;">
@@ -852,7 +851,7 @@
                             <h3 style="margin-top:18px; color:{{$result->color}}; margin-right: 5px; align-items: center;">Завтра</h3>
                         </div>
                         <div class="question_checkbox col-2 px-0" style="max-height: 40px; padding-top: 16px; margin-left:10px; max-width: 40px;">
-                            <input type="checkbox" id="a{{$result->id}}" style="margin-top:3px;" />
+                            <input type="checkbox" id="a{{$result->id}}" onclick="Select({{$result->id}})" @if($result->percent == 100) checked @endif style="margin-top:3px;" />
                             <label onclick="Done('a{{$result->id}}')" style="transform: scale(0.2)!important; left: -50px; top: -23px;" for="a{{$result->id}}" class="check-box"></label>
                             <div class="wrapper-dropdown me-0" style="max-width: 15px; margin-left: 26px; margin-top: -5px; max-height: 8px; background: none;">
                                 <img class="quest_text" style="max-width: 4px; max-height: 20px; margin-top: -12px;" src="{{asset('assets/images/dots.png')}}">
@@ -864,7 +863,6 @@
                         </div>
                     </div>
                 </div>
-            @endif
         @endforeach
 
     </div>
@@ -884,4 +882,20 @@
    function Done(id) {
       document.getElementById(id).classList.toggle('checked');
    }
+   function Select(id){
+        const _token = document.getElementsByName("_token")[0].value;
+        let formData = new FormData();
+        formData.append('_token', _token);
+        formData.append('id', id);
+        const send = ts('{{Route("AgreeTask")}}', 'POST', formData);
+        send.then((result) => {
+            console.log(result);
+            if (result.status == false) {
+                alert(result.error);
+                document.getElementById('a' + id).checked = false;
+            } else {
+                location.reload();
+            }
+        });
+    }
 </script>
