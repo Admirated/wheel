@@ -124,6 +124,7 @@ class PageController extends Controller
                 return redirect(Route('page', ['page' => 'chooseWheels']));
             }
             $title = $PageInfo['circle']->name;
+
         }
         if($page == "BalanceWheel"){
             $circles = circle::select()->where('user_id', $CheckAuth['data']->id)->get();

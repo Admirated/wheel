@@ -44,3 +44,4 @@ Route::post('/api/user/create/Destinations', 'UserController@CreateDestinations'
 Route::post('/api/send/message', "MainController@MessageSendUrl")->name('MessageSendUrl');
 Route::post('/api/user/create/note', 'UserController@CreateNote')->name('CreateNote');
 Route::post('/api/user/create/default', 'PageController@CreateCircles')->name('CreateCircles');
+Route::post('/api/user/agree/task', 'CircleController@AgreeTask')->name('AgreeTask');
