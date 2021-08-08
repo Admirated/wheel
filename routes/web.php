@@ -45,4 +45,4 @@ Route::post('/api/send/message', "MainController@MessageSendUrl")->name('Message
 Route::post('/api/user/create/note', 'UserController@CreateNote')->name('CreateNote');
 Route::post('/api/user/create/default', 'PageController@CreateCircles')->name('CreateCircles');
 Route::post('/api/user/agree/task', 'CircleController@AgreeTask')->name('AgreeTask');
-//Route::post('/api/user/delete/task', 'CircleController@DeleteTask')->name('DeleteTask');
+Route::post('/api/user/delete/task', 'CircleController@DeleteTask')->name('DeleteTask');
