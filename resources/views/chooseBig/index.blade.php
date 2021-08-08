@@ -857,7 +857,7 @@
                                 <img class="quest_text" style="max-width: 4px; max-height: 20px; margin-top: -12px;" src="{{asset('assets/images/dots.png')}}">
                                 <ul class="dropdown" style="width: 100px;left: -85px; top: 29px;">
                                     <li style="line-height: 14px;margin-top: 5px;"><a>Редакти-<br>ровать</a></li>
-                                    <li id="deleteQuest" style="line-height: 12px;margin-top: 5px;"><a>Удалить</a></li>
+                                    <li id="deleteQuest" style="line-height: 12px;margin-top: 5px;"><a onclick="Delete({{$result->id}})">Удалить</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -888,6 +888,22 @@
         formData.append('_token', _token);
         formData.append('id', id);
         const send = ts('{{Route("AgreeTask")}}', 'POST', formData);
+        send.then((result) => {
+            console.log(result);
+            if (result.status == false) {
+                alert(result.error);
+                document.getElementById('a' + id).checked = false;
+            } else {
+                location.reload();
+            }
+        });
+    }
+    function Delete(id){
+        const _token = document.getElementsByName("_token")[0].value;
+        let formData = new FormData();
+        formData.append('_token', _token);
+        formData.append('id', id);
+        const send = ts('{{Route("DeleteTask")}}', 'POST', formData);
         send.then((result) => {
             console.log(result);
             if (result.status == false) {
