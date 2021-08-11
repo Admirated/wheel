@@ -16,7 +16,7 @@
                 while($result_answer = mysqli_fetch_assoc($select_answers)){
                     $table_answers[] = $result_answer;
                 }
-                $table[] = ['question' => ['type' => $result_question['type'], 'name' => $result_question['name'], 'id' => $result_question['id']], 'answer' => $table_answers];
+                $table[] = ['question' => ['type' => $result_question['type'], 'name' => $result_question['name'], 'id' => $result_question['id'], 'type_answer' => $result_question['type_answer'], 'answer' => $result_question['answer']], 'answer' => $table_answers];
             }
             $result = ['status' => true, 'data' => $table];
         }
@@ -24,4 +24,4 @@
         echo $result;
         exit;
     }
-?>
+?> 
